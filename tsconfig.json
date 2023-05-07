@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+      "module": "commonjs",
+      "esModuleInterop": true,
+      "outDir": "./dist",
+      "rootDir": "./",
+      "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
+      "forceConsistentCasingInFileNames": true,
+      "strict": true,
+      "skipLibCheck": true,
+      "moduleResolution": "Node",
+      "strictPropertyInitialization": false,
+      "target": "ES5"
+    },
+    "ts-node": {
+      "files": true
+    },
+    "exclude": ["node_modules", "test", "dist", "**/*spec.ts",]
+  }
+  
