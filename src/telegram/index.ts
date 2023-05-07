@@ -10,7 +10,7 @@ export const startTelegramBot = async (): Promise<void> => {
     const chatId = msg.chat.id;
     bot.sendMessage(
       chatId,
-      "Welcome to the Joke Bot! Send /new to get a random joke."
+      "v"
     );
   });
 
