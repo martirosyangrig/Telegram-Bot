@@ -1,6 +1,7 @@
 import TelegramBot, { Message } from "node-telegram-bot-api";
 import { envConfig } from "../config/env";
 import BluebirdPromise from 'bluebird';
+import { JokesService } from "../services/jokes";
 
 BluebirdPromise.config({
   cancellation: true
@@ -18,33 +19,28 @@ export const startTelegramBot = async (): Promise<void> => {
     );
   });
 
-  bot.onText(/\/new/, (msg: Message) => {
+  bot.onText(/\/new/, async (msg: Message) => {
     const chatId = msg.chat.id;
-    bot.sendMessage(
-      chatId,
-      "vvvvv"
-    );
-    // const chatId = msg.chat.id;
-    // try {
-    //   const joke = await JokesService.getOneRandom();
+    try {
+      const joke = await JokesService.getOneRandom();
 
-    //   if (joke) {
-    //     bot.sendMessage(chatId, joke.content);
-    //   } else {
-    //     bot.sendMessage(chatId, "No jokes found!");
-    //   }
-    // } catch (error) {
-    //   console.error("Failed to retrieve a joke:", error);
-    //   bot.sendMessage(
-    //     chatId,
-    //     "Failed to retrieve a joke. Please try again later."
-    //   );
-    // }
+      if (joke) {
+        bot.sendMessage(chatId, joke.content);
+      } else {
+        bot.sendMessage(chatId, "No jokes found!");
+      }
+    } catch (error) {
+      console.error("Failed to retrieve a joke:", error);
+      bot.sendMessage(
+        chatId,
+        "Failed to retrieve a joke. Please try again later."
+      );
+    }
   });
 
   bot.onText(/(.+)/, (msg: Message) => {
     const chatId = msg.chat.id;
-    bot.sendMessage(chatId, `I'm sorry, I don't understand "lil". Please use valid commands.`);
+    bot.sendMessage(chatId, `To get a new joke send '/new'`);
   });
 
 };

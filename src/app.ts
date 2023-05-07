@@ -2,6 +2,7 @@ import bodyParser from "body-parser";
 import express from "express";
 import "reflect-metadata";
 import cors from "cors";
+import Index from "./routes/index"
 import { AppDataSource } from "./config/postgres";
 
 export class ExpressLoader {
@@ -18,7 +19,8 @@ export class ExpressLoader {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(cors({ origin: "*" }));
-  }
+    this.app.use('/', Index)
+;  }
 
   listen() {
     try {

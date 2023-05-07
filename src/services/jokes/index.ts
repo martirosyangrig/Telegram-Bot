@@ -10,8 +10,7 @@ export class JokesService {
     }
 
     static async getOneRandom () {
-        const randomJoke: Jokes = await jokesRepository
-        .query(`SELECT * FROM jokes ORDER BY RANDOM() LIMIT 1`);
+        const randomJoke: Jokes | null = await jokesRepository.findOneBy({id: 0})
 
         return randomJoke;
     }
