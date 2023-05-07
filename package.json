@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --watch *.ts --exec ts-node ./src/index.ts",
+    "dev": "npm run migration && nodemon --watch *.ts --exec ts-node ./src/index.ts",
     "start": "npm run migration && node ./dist/src/index.js",
     "build": "npm install && tsc -p .",
     "typeorm": "typeorm-ts-node-commonjs",
@@ -15,6 +15,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/bluebird": "^3.5.38",
     "@types/body-parser": "^1.19.2",
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
@@ -26,6 +27,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
+    "bluebird": "^3.7.2",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
