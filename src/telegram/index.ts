@@ -14,22 +14,27 @@ export const startTelegramBot = async (): Promise<void> => {
     );
   });
 
-  bot.onText(/\/new/, async (msg: Message) => {
+  bot.onText(/\/new/, (msg: Message) => {
     const chatId = msg.chat.id;
-    try {
-      const joke = await JokesService.getOneRandom();
+    bot.sendMessage(
+      chatId,
+      "vvvvv"
+    );
+    // const chatId = msg.chat.id;
+    // try {
+    //   const joke = await JokesService.getOneRandom();
 
-      if (joke) {
-        bot.sendMessage(chatId, joke.content);
-      } else {
-        bot.sendMessage(chatId, "No jokes found!");
-      }
-    } catch (error) {
-      console.error("Failed to retrieve a joke:", error);
-      bot.sendMessage(
-        chatId,
-        "Failed to retrieve a joke. Please try again later."
-      );
-    }
+    //   if (joke) {
+    //     bot.sendMessage(chatId, joke.content);
+    //   } else {
+    //     bot.sendMessage(chatId, "No jokes found!");
+    //   }
+    // } catch (error) {
+    //   console.error("Failed to retrieve a joke:", error);
+    //   bot.sendMessage(
+    //     chatId,
+    //     "Failed to retrieve a joke. Please try again later."
+    //   );
+    // }
   });
 };
