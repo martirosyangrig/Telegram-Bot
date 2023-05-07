@@ -1,6 +1,10 @@
 import TelegramBot, { Message } from "node-telegram-bot-api";
 import { envConfig } from "../config/env";
-import { JokesService } from "../services/jokes";
+import BluebirdPromise from 'bluebird';
+
+BluebirdPromise.config({
+  cancellation: true
+});
 
 export const startTelegramBot = async (): Promise<void> => {
   const botToken = envConfig.TG_API_KEY || "";
@@ -37,4 +41,10 @@ export const startTelegramBot = async (): Promise<void> => {
     //   );
     // }
   });
+
+  bot.onText(/(.+)/, (msg: Message) => {
+    const chatId = msg.chat.id;
+    bot.sendMessage(chatId, `I'm sorry, I don't understand "lil". Please use valid commands.`);
+  });
+
 };
